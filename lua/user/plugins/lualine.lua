@@ -3,10 +3,9 @@ return {
   opts = {
     options = {
       icons_enabled = true,
-      theme = 'tokyonight',
+      theme = 'vscode',
       component_separators = '|',
       section_separators = { left = '', right = '' },
     },
   },
 }
-
