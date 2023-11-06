@@ -7,7 +7,7 @@ return {
   end,
   opts = {
     bottom = {
-      -- toggleterm / lazyterm at the bottom with a height of 40% of the screen
+      -- toggleterm / lazyterm at the bottom with a height of 25% of the screen
       {
         ft = 'toggleterm',
         size = { height = 0.4 },
