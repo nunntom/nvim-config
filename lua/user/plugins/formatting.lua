@@ -23,13 +23,14 @@ return {
         php = { 'intelephense' },
         elm = { 'elm-format' },
         nix = { 'rnix' },
+        scm = { 'prettier' },
       },
       format_on_save = function(bufnr)
         -- Disable with a global or buffer-local variable
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
           return
         end
-        return { timeout_ms = 1000, lsp_fallback = true }
+        return { timeout_ms = 5000, lsp_fallback = true }
       end,
     }
 
@@ -56,7 +57,7 @@ return {
       conform.format {
         lsp_fallback = true,
         async = false,
-        timeout_ms = 1000,
+        timeout_ms = 5000,
       }
     end, { desc = 'Format file or range (in visual mode)' })
   end,

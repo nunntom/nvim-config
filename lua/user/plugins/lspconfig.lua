@@ -27,7 +27,8 @@ return {
       nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
       nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-      nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+      -- nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+      nmap('gr', ':Lspsaga finder ref<CR>', '[G]oto [R]eferences')
       nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
       nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
       nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
@@ -85,6 +86,92 @@ return {
     lspconfig['intelephense'].setup {
       capabilities = capabilities,
       on_attach = on_attach,
+      settings = {
+        intelephense = {
+          stubs = {
+
+            'apache',
+            'bcmath',
+            'bz2',
+            'calendar',
+            'com_dotnet',
+            'Core',
+            'ctype',
+            'curl',
+            'date',
+            'dba',
+            'dom',
+            'enchant',
+            'exif',
+            'FFI',
+            'fileinfo',
+            'filter',
+            'fpm',
+            'ftp',
+            'gd',
+            'gettext',
+            'gmp',
+            'hash',
+            'iconv',
+            'imap',
+            'intl',
+            'json',
+            'ldap',
+            'libxml',
+            'mbstring',
+            'meta',
+            'mysqli',
+            'oci8',
+            'odbc',
+            'openssl',
+            'pcntl',
+            'pcre',
+            'PDO',
+            'pdo_ibm',
+            'pdo_mysql',
+            'pdo_pgsql',
+            'pdo_sqlite',
+            'pgsql',
+            'Phar',
+            'posix',
+            'pspell',
+            'readline',
+            'Reflection',
+            'session',
+            'shmop',
+            'SimpleXML',
+            'snmp',
+            'soap',
+            'sockets',
+            'sodium',
+            'SPL',
+            'sqlite3',
+            'standard',
+            'superglobals',
+            'sysvmsg',
+            'sysvsem',
+            'sysvshm',
+            'tidy',
+            'tokenizer',
+            'xml',
+            'xmlreader',
+            'xmlrpc',
+            'xmlwriter',
+            'xsl',
+            'Zend OPcache',
+            'zip',
+            'zlib',
+            'wordpress',
+            'imagick',
+            'woocommerce',
+            'wordpress-globals',
+            'wp-cli',
+          },
+          files = {
+            maxSize = 5000000,
+          },
+        },
+      },
     }
 
     lspconfig['rnix'].setup {

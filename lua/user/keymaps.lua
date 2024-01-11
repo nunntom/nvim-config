@@ -26,28 +26,31 @@ keymap('n', '<C-Left>', ':vertical resize -2<CR>', opts)
 keymap('n', '<C-Right>', ':vertical resize +2<CR>', opts)
 
 -- Navigate buffers
-keymap('n', '<S-l>', ':bnext<CR>', opts)
-keymap('n', '<S-h>', ':bprevious<CR>', opts)
+-- keymap('n', '<S-l>', ':bnext<CR>', opts)
+-- keymap('n', '<S-h>', ':bprevious<CR>', opts)
 
 -- Move text up and down
 keymap('n', '<A-j>', ':m .+1<CR>==', opts)
 keymap('n', '<A-k>', ':m .-2<CR>==', opts)
 
+keymap('n', '<C-d>', '<C-d>zz', opts)
+keymap('n', '<C-u>', '<C-u>zz', opts)
+
 -- Visual --
 
 -- Paste without yanking
-keymap('v', 'p', '"_dP', opts)
+-- keymap('v', 'p', '"_dP', opts)
 
 -- https://github.com/pazams/d-is-for-delete
 
-keymap('n', 'x', '"_x', opts)
-keymap('n', 'd', '"_d', opts)
-keymap('n', 'D', '"_D', opts)
-keymap('v', 'd', '"_d', opts)
-
-keymap('n', '<leader>d', '""d', opts)
-keymap('n', '<leader>D', '""D', opts)
-keymap('v', '<leader>d', '""d', opts)
+-- keymap('n', 'x', '"_x', opts)
+-- keymap('n', 'd', '"_d', opts)
+-- keymap('n', 'D', '"_D', opts)
+-- keymap('v', 'd', '"_d', opts)
+--
+-- keymap('n', '<leader>d', '""d', opts)
+-- keymap('n', '<leader>D', '""D', opts)
+-- keymap('v', '<leader>d', '""d', opts)
 
 -- Stay in indent mode
 keymap('v', '<', '<gv^', opts)
@@ -105,7 +108,7 @@ require('which-key').register {
   ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
   ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
   ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  ['<leader>h'] = { name = 'More git', _ = 'which_key_ignore' },
+  -- ['<leader>h'] = { name = 'More git', _ = 'which_key_ignore' },
   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },

@@ -28,6 +28,11 @@ return {
           'twig',
           'regex',
           'json',
+          'css',
+          'query',
+          'yaml',
+          'http',
+          'php',
         },
 
         -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
@@ -38,8 +43,8 @@ return {
         incremental_selection = {
           enable = true,
           keymaps = {
-            init_selection = '<c-space>',
-            node_incremental = '<c-space>',
+            -- init_selection = '<c-space>',
+            -- node_incremental = '<c-space>',
             scope_incremental = '<c-s>',
             node_decremental = '<M-space>',
           },

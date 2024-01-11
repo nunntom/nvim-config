@@ -1,6 +1,8 @@
 -- [[ Setting options ]] See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
+vim.wo.wrap = false
+
 -- Set highlight on search
 vim.o.hlsearch = false
 
@@ -43,8 +45,7 @@ vim.o.termguicolors = true
 local autogroup = vim.api.nvim_create_augroup('FormatOptionsAdjust', { clear = true })
 vim.api.nvim_create_autocmd({ 'BufEnter' }, {
   group = autogroup,
-  command = 'set formatoptions-=r formatoptions-=c formatoptions-=o'
+  command = 'set formatoptions-=r formatoptions-=c formatoptions-=o',
 })
 
-
-vim.o.sessionoptions = "blank,buffers,curdir,tabpages,winsize,winpos,terminal,localoptions"
+vim.o.sessionoptions = 'blank,buffers,curdir,tabpages,winsize,winpos,terminal,localoptions'

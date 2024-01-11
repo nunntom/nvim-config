@@ -7,6 +7,7 @@ return {
       suggestion = {
         enabled = true,
         auto_trigger = true,
+        accept = false,
         keymap = {
           accept_word = '<C-Right>',
         },

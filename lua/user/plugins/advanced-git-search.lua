@@ -1,6 +1,5 @@
 return {
   'aaronhallaert/advanced-git-search.nvim',
-  after = 'telescope.nvim',
   dependencies = {
     'nvim-telescope/telescope.nvim',
     'tpope/vim-fugitive',
