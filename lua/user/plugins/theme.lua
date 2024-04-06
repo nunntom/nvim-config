@@ -1,3 +1,41 @@
+-- return {
+--   'Tsuzat/NeoSolarized.nvim',
+--   lazy = false, -- make sure we load this during startup if it is your main colorscheme
+--   priority = 1000, -- make sure to load this before all the other start plugins
+--   config = function()
+--     require('NeoSolarized').setup {
+--       style = 'dark',
+--       styles = { undercurl = true },
+--     }
+--     vim.cmd [[ colorscheme NeoSolarized ]]
+--   end,
+-- }
+-- return {
+--   'rebelot/kanagawa.nvim',
+--   config = function()
+--     require('kanagawa').setup {
+--       undercurl = true,
+--     }
+--   end,
+-- }
+
+-- return {
+--   'tiagovla/tokyodark.nvim',
+--   opts = {
+--     -- custom options here
+--     undercurl = true,
+--   },
+--   config = function(_, opts)
+--     require('tokyodark').setup(opts) -- calling setup is optional
+--     vim.cmd [[colorscheme tokyodark]]
+--   end,
+-- }
+-- return {
+--   'craftzdog/solarized-osaka.nvim',
+--   config = function()
+--     require('solarized-osaka').setup {}
+--   end,
+-- }
 return {
   'Mofiqul/vscode.nvim',
   lazy = false,

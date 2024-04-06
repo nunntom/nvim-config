@@ -22,8 +22,9 @@ return {
         twig = { 'prettier' },
         php = { 'intelephense' },
         elm = { 'elm-format' },
-        nix = { 'rnix' },
+        nix = { 'nixpkgs-fmt', 'nil_ls' },
         scm = { 'prettier' },
+        go = { 'gofmt', 'gofumpt' },
       },
       format_on_save = function(bufnr)
         -- Disable with a global or buffer-local variable

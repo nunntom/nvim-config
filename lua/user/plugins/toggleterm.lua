@@ -1,5 +1,6 @@
 return {
   'akinsho/toggleterm.nvim',
+  enabled = false,
   version = '*',
   config = function()
     require('toggleterm').setup {
@@ -18,6 +19,6 @@ return {
 
     vim.cmd 'autocmd! TermOpen term://* lua set_terminal_keymaps()'
 
-    vim.cmd 'autocmd! BufEnter term://* startinsert'
+    -- vim.cmd 'autocmd! BufEnter term://* startinsert'
   end,
 }

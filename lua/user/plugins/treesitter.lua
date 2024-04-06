@@ -12,6 +12,7 @@ return {
           'c',
           'cpp',
           'go',
+          'templ',
           'lua',
           'python',
           'rust',
@@ -95,5 +96,10 @@ return {
         },
       }
     end, 0)
+    vim.filetype.add {
+      extension = {
+        templ = 'templ',
+      },
+    }
   end,
 }

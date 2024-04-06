@@ -2,6 +2,7 @@ vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
 
 return {
   'nvim-neo-tree/neo-tree.nvim',
+  enabled = false,
   branch = 'v3.x',
   dependencies = {
     'nvim-lua/plenary.nvim',

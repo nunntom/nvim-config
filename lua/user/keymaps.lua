@@ -1,4 +1,6 @@
 local opts = { noremap = true, silent = true }
+local wk = require 'which-key'
+local telescope = require 'telescope.builtin'
 
 -- Shorten function name
 local keymap = vim.keymap.set
@@ -14,11 +16,11 @@ keymap('i', 'kj', '<ESC>', opts)
 keymap('n', '<leader>q', MiniBufremove.wipeout, opts)
 
 -- Better window navigation
-keymap('n', '<C-h>', '<C-w>h', opts)
-keymap('n', '<C-j>', '<C-w>j', opts)
-keymap('n', '<C-k>', '<C-w>k', opts)
-keymap('n', '<C-l>', '<C-w>l', opts)
-
+-- keymap('n', '<C-h>', '<C-w>h', opts)
+-- keymap('n', '<C-j>', '<C-w>j', opts)
+-- keymap('n', '<C-k>', '<C-w>k', opts)
+-- keymap('n', '<C-l>', '<C-w>l', opts)
+--
 -- Resize with arrows
 keymap('n', '<C-Up>', ':resize -2<CR>', opts)
 keymap('n', '<C-Down>', ':resize +2<CR>', opts)
@@ -68,41 +70,38 @@ keymap('x', '<A-j>', ":m '>+1<CR>gv=gv", opts)
 keymap('x', '<A-k>', ":m '<-2<CR>gv=gv", opts)
 
 -- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 --Toggle NeoTree
-vim.keymap.set('n', '<C-n>', ':Neotree filesystem reveal left toggle<CR>', { silent = true })
+keymap('n', '<C-n>', ':Neotree filesystem reveal left toggle<CR>', { silent = true })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+keymap('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+keymap('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+keymap('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+keymap('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- Telescope
 
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
-vim.keymap.set('n', '<leader>fs', require('telescope').extensions.live_grep_args.live_grep_args, { noremap = true })
+keymap('n', '<leader>gf', telescope.git_files, { desc = 'Search [G]it [F]iles' })
+keymap('n', '<leader>sf', telescope.find_files, { desc = '[S]earch [F]iles' })
+keymap('n', '<leader>sh', telescope.help_tags, { desc = '[S]earch [H]elp' })
+keymap('n', '<leader>sw', telescope.grep_string, { desc = '[S]earch current [W]ord' })
+keymap('n', '<leader>sg', telescope.live_grep, { desc = '[S]earch by [G]rep' })
+keymap('n', '<leader>sd', telescope.diagnostics, { desc = '[S]earch [D]iagnostics' })
+keymap('n', '<leader>sr', telescope.resume, { desc = '[S]earch [R]esume' })
+keymap('n', '<leader>fs', require('telescope').extensions.live_grep_args.live_grep_args, { noremap = true })
 
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>/', function()
+keymap('n', '<leader>?', telescope.oldfiles, { desc = '[?] Find recently opened files' })
+keymap('n', '<leader><space>', telescope.buffers, { desc = '[ ] Find existing buffers' })
+keymap('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+  telescope.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
     winblend = 10,
     previewer = false,
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
-
--- Oil.nvim
-vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 
 require('which-key').register {
   ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
@@ -112,4 +111,56 @@ require('which-key').register {
   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+}
+
+local lsp_keymaps = function(bufnr)
+  wk.register({
+    l = {
+      name = 'Lspsaga',
+      c = { '<cmd>Lspsaga code_action<cr>', 'Code Action' },
+      o = { '<cmd>Lspsaga outline<cr>', 'Outline' },
+      r = { '<cmd>Lspsaga rename<cr>', 'Rename' },
+      d = { '<cmd>Lspsaga goto_definition<cr>', 'Lsp GoTo Definition' },
+      f = { '<cmd>Lspsaga finder<cr>', 'Lsp Finder' },
+      p = { '<cmd>Lspsaga preview_definition<cr>', 'Preview Definition' },
+      s = { '<cmd>Lspsaga signature_help<cr>', 'Signature Help' },
+      w = { '<cmd>Lspsaga show_workspace_diagnostics<cr>', 'Show Workspace Diagnostics' },
+    },
+  }, { prefix = '<leader>', buffer = bufnr })
+
+  local nmap = function(keys, func, desc)
+    if desc then
+      desc = 'LSP: ' .. desc
+    end
+
+    keymap('n', keys, func, { buffer = bufnr, desc = desc })
+  end
+
+  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+
+  nmap('gd', telescope.lsp_definitions, '[G]oto [D]efinition')
+  -- nmap('gr', telescope.lsp_references, '[G]oto [R]eferences')
+  nmap('gr', ':Lspsaga finder ref<CR>', '[G]oto [R]eferences')
+  nmap('<leader>pd', ':Lspsaga peek_definition<CR>', '[P]eek [D]efinition')
+  nmap('gI', telescope.lsp_implementations, '[G]oto [I]mplementation')
+  nmap('<leader>D', telescope.lsp_type_definitions, 'Type [D]efinition')
+  nmap('<leader>ds', telescope.lsp_document_symbols, '[D]ocument [S]ymbols')
+  nmap('<leader>ws', telescope.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+
+  -- See `:help K` for why this keymap
+  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+
+  -- Lesser used LSP functionality
+  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
+  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+  nmap('<leader>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, '[W]orkspace [L]ist Folders')
+end
+
+return {
+  lsp_keymaps = lsp_keymaps,
 }

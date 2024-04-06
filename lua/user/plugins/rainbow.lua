@@ -1,5 +1,5 @@
 return {
-  'nunntom/rainbow-delimiters.nvim',
+  'HiPhish/rainbow-delimiters.nvim',
   branch = 'master',
   config = function()
     local rainbow_delimiters = require 'rainbow-delimiters'
