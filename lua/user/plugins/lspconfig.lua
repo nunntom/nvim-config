@@ -48,9 +48,20 @@ return {
       filetypes = { 'html', 'twig', 'hbs' },
     }
 
+    lspconfig['emmet_language_server'].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      filetypes = { 'html', 'twig', 'hbs', 'javascript', 'typescript', 'react' },
+    }
+
     lspconfig['tsserver'].setup {
       capabilities = capabilities,
       on_attach = on_attach,
+      settings = {
+        implicitProjectConfiguration = {
+          checkJs = true,
+        },
+      },
     }
 
     lspconfig['elmls'].setup {

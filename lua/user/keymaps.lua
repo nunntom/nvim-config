@@ -103,30 +103,17 @@ keymap('n', '<leader>/', function()
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
 
-require('which-key').register {
-  ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-  ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  -- ['<leader>h'] = { name = 'More git', _ = 'which_key_ignore' },
-  ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+wk.add {
+  { '<leader>c', group = '[C]ode' },
+  { '<leader>d', group = '[D]ocument' },
+  { '<leader>g', group = '[G]it' },
+  { '<leader>r', group = '[R]ename' },
+  { '<leader>s', group = '[S]earch' },
+  { '<leader>w', group = '[W]orkspace' },
 }
 
 local lsp_keymaps = function(bufnr)
-  wk.register({
-    l = {
-      name = 'Lspsaga',
-      c = { '<cmd>Lspsaga code_action<cr>', 'Code Action' },
-      o = { '<cmd>Lspsaga outline<cr>', 'Outline' },
-      r = { '<cmd>Lspsaga rename<cr>', 'Rename' },
-      d = { '<cmd>Lspsaga goto_definition<cr>', 'Lsp GoTo Definition' },
-      f = { '<cmd>Lspsaga finder<cr>', 'Lsp Finder' },
-      p = { '<cmd>Lspsaga preview_definition<cr>', 'Preview Definition' },
-      s = { '<cmd>Lspsaga signature_help<cr>', 'Signature Help' },
-      w = { '<cmd>Lspsaga show_workspace_diagnostics<cr>', 'Show Workspace Diagnostics' },
-    },
-  }, { prefix = '<leader>', buffer = bufnr })
+  wk.add { '<leader>l', group = '[L]SP' }
 
   local nmap = function(keys, func, desc)
     if desc then
@@ -135,6 +122,15 @@ local lsp_keymaps = function(bufnr)
 
     keymap('n', keys, func, { buffer = bufnr, desc = desc })
   end
+
+  nmap('<leader>lc', '<cmd>Lspsaga code_action<CR>', '[C]ode Action')
+  nmap('<leader>lo', '<cmd>Lspsaga outline<CR>', '[O]utline')
+  nmap('<leader>lr', '<cmd>Lspsaga rename<CR>', '[R]ename')
+  nmap('<leader>ld', '<cmd>Lspsaga goto_definition<CR>', '[D]efinition')
+  nmap('<leader>lf', '<cmd>Lspsaga finder<CR>', '[F]inder')
+  nmap('<leader>lp', '<cmd>Lspsaga preview_definition<CR>', '[P]review Definition')
+  nmap('<leader>ls', '<cmd>Lspsaga signature_help<CR>', '[S]ignature Help')
+  nmap('<leader>lw', '<cmd>Lspsaga show_workspace_diagnostics<CR>', '[W]orkspace Diagnostics')
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')

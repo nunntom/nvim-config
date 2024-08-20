@@ -13,15 +13,30 @@ return {
       svelte = { 'eslint_d' },
     }
 
+    local eslint = lint.linters.eslint_d
+
+    eslint.args = {
+      '--no-warn-ignored', -- <-- this is the key argument
+      '--format',
+      'json',
+      '--stdin',
+      '--stdin-filename',
+      function()
+        return vim.api.nvim_buf_get_name(0)
+      end,
+    }
+
     local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
 
-    vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
+    vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
       group = lint_augroup,
       callback = function()
         if vim.g.disable_lint or vim.b.disable_lint then
           return
         end
-        lint.try_lint()
+        lint.try_lint(nil, {
+          ignore_errors = true, -- ignore command-not-found errors
+        })
       end,
     })
 
@@ -45,7 +60,9 @@ return {
     })
 
     vim.keymap.set('n', '<leader>l', function()
-      lint.try_lint()
+      lint.try_lint(nil, {
+        ignore_errors = true, -- ignore command-not-found errors
+      })
     end, { desc = 'Trigger linting for current file' })
   end,
 }

@@ -12,7 +12,16 @@ return {
     mason.setup {}
 
     mason_lspconfig.setup {
-      ensure_installed = { 'tsserver', 'html', 'intelephense', 'gopls', 'tailwindcss', 'htmx' },
+      ensure_installed = {
+        'tsserver',
+        'html',
+        'intelephense',
+        'gopls',
+        'tailwindcss',
+        'htmx',
+        'nil_ls',
+        'emmet_language_server',
+      },
     }
 
     mason_tool_installer.setup {
@@ -22,8 +31,6 @@ return {
         'eslint_d',
         'pretty-php',
         'elm-format',
-        'templ',
-        'nixpkgs-fmt',
       },
     }
   end,

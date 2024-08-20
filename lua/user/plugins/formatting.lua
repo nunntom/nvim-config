@@ -22,7 +22,7 @@ return {
         twig = { 'prettier' },
         php = { 'intelephense' },
         elm = { 'elm-format' },
-        nix = { 'nixpkgs-fmt', 'nil_ls' },
+        nix = { 'nixfmt', 'nil_ls' },
         scm = { 'prettier' },
         go = { 'gofmt', 'gofumpt' },
       },

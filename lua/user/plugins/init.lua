@@ -14,5 +14,4 @@ return {
 
   'weilbith/nvim-code-action-menu',
   'nvim-pack/nvim-spectre',
-  'vim-visual-multi',
 }
