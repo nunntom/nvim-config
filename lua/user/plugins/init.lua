@@ -9,9 +9,6 @@ return {
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
 
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
-
-  'weilbith/nvim-code-action-menu',
+  -- 'weilbith/nvim-code-action-menu',
   'nvim-pack/nvim-spectre',
 }

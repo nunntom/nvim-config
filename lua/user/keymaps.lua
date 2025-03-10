@@ -82,6 +82,12 @@ keymap('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic mess
 keymap('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 keymap('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
+-- Better digraphs
+
+keymap('i', '<C-k>', function()
+  require('better-digraphs').digraphs 'insert'
+end, { noremap = false, desc = 'Insert digraph' })
+
 -- Telescope
 
 keymap('n', '<leader>gf', telescope.git_files, { desc = 'Search [G]it [F]iles' })

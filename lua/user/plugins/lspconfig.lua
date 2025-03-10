@@ -2,12 +2,10 @@ return {
   'neovim/nvim-lspconfig',
   dependencies = {
     -- Automatically install LSPs to stdpath for neovim
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
-
     -- Useful status updates for LSP
     -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
     { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+    'saghen/blink.cmp',
 
     -- Additional lua configuration, makes nvim stuff amazing!
     'folke/neodev.nvim',
@@ -41,6 +39,7 @@ return {
 
     local lspconfig = require 'lspconfig'
     local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
 
     lspconfig['html'].setup {
       capabilities = capabilities,
@@ -54,7 +53,7 @@ return {
       filetypes = { 'html', 'twig', 'hbs', 'javascript', 'typescript', 'react' },
     }
 
-    lspconfig['tsserver'].setup {
+    lspconfig['ts_ls'].setup {
       capabilities = capabilities,
       on_attach = on_attach,
       settings = {
@@ -62,6 +61,11 @@ return {
           checkJs = true,
         },
       },
+    }
+
+    lspconfig['eslint'].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
     }
 
     lspconfig['elmls'].setup {
@@ -82,15 +86,22 @@ return {
     lspconfig['tailwindcss'].setup {
       capabilities = capabilities,
       on_attach = on_attach,
-      filetypes = { 'templ', 'astro', 'javascript', 'typescript', 'react' },
-      init_options = { userLanguages = { templ = 'html' } },
+      filetypes = { 'html', 'templ', 'astro', 'javascript', 'typescript', 'react', 'gleam' },
+      -- init_options = { userLanguages = { templ = 'html' } },
+      settings = {
+        tailwindCSS = {
+          experimental = {
+            classRegex = { 'class\\("([^"]+)"\\)' },
+          },
+        },
+      },
     }
 
-    lspconfig.htmx.setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      filetypes = { 'html', 'templ' },
-    }
+    -- lspconfig.htmx.setup {
+    --   on_attach = on_attach,
+    --   capabilities = capabilities,
+    --   filetypes = { 'html', 'templ' },
+    -- }
 
     lspconfig['intelephense'].setup {
       capabilities = capabilities,
@@ -184,6 +195,29 @@ return {
     }
 
     lspconfig['nil_ls'].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+    }
+
+    local pid = vim.fn.getpid()
+
+    lspconfig['omnisharp'].setup {
+      cmd = { 'omnisharp', '--languageserver', '--hostPID', tostring(pid) },
+      capabilities = capabilities,
+      on_attach = on_attach,
+    }
+
+    lspconfig['graphql'].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+    }
+
+    lspconfig['gleam'].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+    }
+
+    lspconfig['erlangls'].setup {
       capabilities = capabilities,
       on_attach = on_attach,
     }

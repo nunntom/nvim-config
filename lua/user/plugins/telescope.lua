@@ -21,10 +21,13 @@ return {
       -- For major updates, this must be adjusted manually.
       version = '^1.0.0',
     },
+    { 'alduraibi/telescope-glyph.nvim' },
+    { 'protex/better-digraphs.nvim' },
   },
   config = function()
     require('telescope').load_extension 'live_grep_args'
     require('telescope').load_extension 'fzf'
+    require('telescope').load_extension 'glyph'
 
     require('telescope').setup {
       defaults = {

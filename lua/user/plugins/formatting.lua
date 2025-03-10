@@ -1,5 +1,6 @@
 return {
   'stevearc/conform.nvim',
+  enabled = true,
   lazy = true,
   event = { 'BufReadPre', 'BufNewFile' }, -- to disable, comment this out
   config = function()
@@ -25,6 +26,7 @@ return {
         nix = { 'nixfmt', 'nil_ls' },
         scm = { 'prettier' },
         go = { 'gofmt', 'gofumpt' },
+        sql = { 'sqlfmt' },
       },
       format_on_save = function(bufnr)
         -- Disable with a global or buffer-local variable

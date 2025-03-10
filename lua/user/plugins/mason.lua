@@ -13,7 +13,7 @@ return {
 
     mason_lspconfig.setup {
       ensure_installed = {
-        'tsserver',
+        'ts_ls',
         'html',
         'intelephense',
         'gopls',
@@ -21,6 +21,10 @@ return {
         'htmx',
         'nil_ls',
         'emmet_language_server',
+        'graphql',
+        'elmls',
+        'erlangls',
+        'eslint',
       },
     }
 
@@ -31,6 +35,8 @@ return {
         'eslint_d',
         'pretty-php',
         'elm-format',
+        'sql-formatter',
+        'sqlfmt',
       },
     }
   end,

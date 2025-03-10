@@ -49,3 +49,6 @@ vim.api.nvim_create_autocmd({ 'BufEnter' }, {
 })
 
 vim.o.sessionoptions = 'blank,buffers,curdir,tabpages,winsize,winpos,terminal,localoptions'
+
+vim.o.spell = true
+vim.o.spelllang = 'en_gb,cs'

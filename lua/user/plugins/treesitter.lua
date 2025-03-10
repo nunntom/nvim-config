@@ -11,6 +11,7 @@ return {
         ensure_installed = {
           'c',
           'cpp',
+          'c_sharp',
           'go',
           'templ',
           'lua',
@@ -37,10 +38,14 @@ return {
           'graphql',
           'xml',
           'http',
+          'corn',
+          'gleam',
+          'erlang',
+          'sql',
         },
 
         -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-        auto_install = false,
+        auto_install = true,
 
         highlight = { enable = true },
         indent = { enable = true },
