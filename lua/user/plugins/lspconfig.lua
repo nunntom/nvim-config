@@ -33,8 +33,11 @@ return {
 
       vim.diagnostic.config {
         virtual_text = false,
+        virtual_lines = {
+          current_line = true,
+        },
       }
-      vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+      -- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
     end
 
     local lspconfig = require 'lspconfig'
@@ -53,6 +56,9 @@ return {
       filetypes = { 'html', 'twig', 'hbs', 'javascript', 'typescript', 'react' },
     }
 
+    local mason_registry = require 'mason-registry'
+    local vue_language_server = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
+
     lspconfig['ts_ls'].setup {
       capabilities = capabilities,
       on_attach = on_attach,
@@ -61,11 +67,36 @@ return {
           checkJs = true,
         },
       },
+      init_options = {
+        plugins = {
+          {
+            name = '@vue/typescript-plugin',
+            location = vue_language_server,
+            languages = { 'vue' },
+          },
+        },
+      },
+      filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+    }
+
+    lspconfig['astro'].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      filetypes = { 'astro' },
+      init_options = {
+        isAstroLSP = true,
+      },
     }
 
     lspconfig['eslint'].setup {
       capabilities = capabilities,
       on_attach = on_attach,
+      settings = {
+        diagnostics = {
+          virtual_text = false,
+          virtual_lines = false,
+        },
+      },
     }
 
     lspconfig['elmls'].setup {
@@ -86,7 +117,7 @@ return {
     lspconfig['tailwindcss'].setup {
       capabilities = capabilities,
       on_attach = on_attach,
-      filetypes = { 'html', 'templ', 'astro', 'javascript', 'typescript', 'react', 'gleam' },
+      filetypes = { 'html', 'templ', 'astro', 'javascript', 'typescript', 'react', 'gleam', 'vue' },
       -- init_options = { userLanguages = { templ = 'html' } },
       settings = {
         tailwindCSS = {
@@ -221,6 +252,12 @@ return {
       capabilities = capabilities,
       on_attach = on_attach,
     }
+
+    -- lspconfig['volar'].setup {
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    --   filetypes = { 'vue' },
+    -- }
 
     lspconfig['lua_ls'].setup {
       on_attach = on_attach,

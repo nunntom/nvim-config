@@ -42,6 +42,8 @@ return {
           'gleam',
           'erlang',
           'sql',
+          'vue',
+          'astro',
         },
 
         -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)

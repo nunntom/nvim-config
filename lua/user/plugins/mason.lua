@@ -25,6 +25,8 @@ return {
         'elmls',
         'erlangls',
         'eslint',
+        'volar',
+        'astro',
       },
     }
 

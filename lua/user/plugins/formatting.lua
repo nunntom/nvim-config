@@ -27,6 +27,7 @@ return {
         scm = { 'prettier' },
         go = { 'gofmt', 'gofumpt' },
         sql = { 'sqlfmt' },
+        vue = { 'eslint_d', 'prettier' },
       },
       format_on_save = function(bufnr)
         -- Disable with a global or buffer-local variable
