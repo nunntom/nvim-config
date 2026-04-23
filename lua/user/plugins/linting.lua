@@ -1,6 +1,6 @@
 return {
   'mfussenegger/nvim-lint',
-  enabled = false,
+  enabled = true,
   lazy = true,
   event = { 'BufReadPre', 'BufNewFile' }, -- to disable, comment this out
   config = function()
@@ -12,6 +12,7 @@ return {
       javascriptreact = { 'eslint_d' },
       typescriptreact = { 'eslint_d' },
       svelte = { 'eslint_d' },
+      php = { 'mago_analyze' },
     }
 
     local eslint = lint.linters.eslint_d
@@ -27,6 +28,67 @@ return {
       end,
     }
 
+    local severities = {
+      error = vim.diagnostic.severity.ERROR,
+      warning = vim.diagnostic.severity.WARN,
+      note = vim.diagnostic.severity.INFO,
+      help = vim.diagnostic.severity.HINT,
+    }
+
+    local pattern = '[^:]+:(%d+):(%d+):%s?(%l+)%[([%w-]+)%]:%s?(.+)'
+    local groups = { 'lnum', 'col', 'severity', 'code', 'message' }
+
+    -- lint.linters.mago_analyze = {
+    --   name = 'mago_analyze',
+    --   cmd = 'mago',
+    --   args = { '--no-colors', 'analyze', '--reporting-format=short' },
+    --   append_fname = true,
+    --   stdin = false,
+    --   ignore_exitcode = true,
+    --   parser = require('lint.parser').from_pattern(pattern, groups, severities, { ['source'] = 'mago_analyze' }),
+    -- }
+
+    local phpstan_bin = 'phpstan'
+
+    lint.linters.phpstan = {
+      name = 'phpstan',
+      cmd = function()
+        local local_bin = vim.fn.fnamemodify('phpstan.sh', ':p')
+        return vim.loop.fs_stat(local_bin) and local_bin or phpstan_bin
+      end,
+      args = {
+        'analyze',
+        '--error-format=json',
+        '--no-progress',
+      },
+      ignore_exitcode = true,
+      parser = function(output, bufnr)
+        if vim.trim(output) == '' or output == nil then
+          return {}
+        end
+
+        local file = vim.json.decode(output).files[vim.api.nvim_buf_get_name(bufnr)]
+
+        if file == nil then
+          return {}
+        end
+
+        local diagnostics = {}
+
+        for _, message in ipairs(file.messages or {}) do
+          table.insert(diagnostics, {
+            lnum = type(message.line) == 'number' and (message.line - 1) or 0,
+            col = 0,
+            message = message.message,
+            source = phpstan_bin,
+            code = message.identifier,
+          })
+        end
+
+        return diagnostics
+      end,
+    }
+
     local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
 
     vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
@@ -36,7 +98,7 @@ return {
           return
         end
         lint.try_lint(nil, {
-          ignore_errors = true, -- ignore command-not-found errors
+          ignore_errors = false, -- ignore command-not-found errors
         })
       end,
     })

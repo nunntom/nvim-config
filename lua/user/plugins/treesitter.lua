@@ -44,7 +44,17 @@ return {
           'sql',
           'vue',
           'astro',
+          'kdl',
+          'hurl',
+          'pug',
+          'caddy',
+          'odin',
         },
+
+        ignore_install = {},
+        modules = {},
+
+        sync_install = false,
 
         -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
         auto_install = true,
@@ -109,6 +119,7 @@ return {
     vim.filetype.add {
       extension = {
         templ = 'templ',
+        jade = 'pug',
       },
     }
   end,

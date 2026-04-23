@@ -6,6 +6,9 @@ return {
       finder = {
         max_height = 0.6,
       },
+      lightbulb = {
+        enable = false,
+      },
     }
   end,
   dependencies = {

@@ -13,9 +13,9 @@ return {
 
     mason_lspconfig.setup {
       ensure_installed = {
-        'ts_ls',
         'html',
         'intelephense',
+        'phpactor',
         'gopls',
         'tailwindcss',
         'htmx',
@@ -24,21 +24,26 @@ return {
         'graphql',
         'elmls',
         'erlangls',
-        'eslint',
-        'volar',
         'astro',
+        'vue_ls',
+        'vtsls',
+        'glsl_analyzer',
       },
     }
 
     mason_tool_installer.setup {
       ensure_installed = {
-        'prettier',
-        'isort',
         'eslint_d',
+        'prettierd',
+        'isort',
         'pretty-php',
         'elm-format',
         'sql-formatter',
         'sqlfmt',
+        'php-cs-fixer',
+        'php-debug-adapter',
+        'phpstan',
+        'yamlfmt',
       },
     }
   end,

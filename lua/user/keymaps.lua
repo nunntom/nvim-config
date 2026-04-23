@@ -9,8 +9,8 @@ local keymap = vim.keymap.set
 keymap({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Press jk fast to exit insert mode
-keymap('i', 'jk', '<ESC>', opts)
-keymap('i', 'kj', '<ESC>', opts)
+-- keymap('i', 'jk', '<ESC>', opts)
+-- keymap('i', 'kj', '<ESC>', opts)
 
 -- Close buffer
 keymap('n', '<leader>q', MiniBufremove.wipeout, opts)
@@ -91,16 +91,16 @@ end, { noremap = false, desc = 'Insert digraph' })
 -- Telescope
 
 keymap('n', '<leader>gf', telescope.git_files, { desc = 'Search [G]it [F]iles' })
-keymap('n', '<leader>sf', telescope.find_files, { desc = '[S]earch [F]iles' })
+-- keymap('n', '<leader>sf', telescope.find_files, { desc = '[S]earch [F]iles' })
 keymap('n', '<leader>sh', telescope.help_tags, { desc = '[S]earch [H]elp' })
 keymap('n', '<leader>sw', telescope.grep_string, { desc = '[S]earch current [W]ord' })
-keymap('n', '<leader>sg', telescope.live_grep, { desc = '[S]earch by [G]rep' })
-keymap('n', '<leader>sd', telescope.diagnostics, { desc = '[S]earch [D]iagnostics' })
+-- keymap('n', '<leader>sg', telescope.live_grep, { desc = '[S]earch by [G]rep' })
+-- keymap('n', '<leader>sd', telescope.diagnostics, { desc = '[S]earch [D]iagnostics' })
 keymap('n', '<leader>sr', telescope.resume, { desc = '[S]earch [R]esume' })
 keymap('n', '<leader>fs', require('telescope').extensions.live_grep_args.live_grep_args, { noremap = true })
 
 keymap('n', '<leader>?', telescope.oldfiles, { desc = '[?] Find recently opened files' })
-keymap('n', '<leader><space>', telescope.buffers, { desc = '[ ] Find existing buffers' })
+-- keymap('n', '<leader><space>', telescope.buffers, { desc = '[ ] Find existing buffers' })
 keymap('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   telescope.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
@@ -136,7 +136,7 @@ local lsp_keymaps = function(bufnr)
   nmap('<leader>lf', '<cmd>Lspsaga finder<CR>', '[F]inder')
   nmap('<leader>lp', '<cmd>Lspsaga preview_definition<CR>', '[P]review Definition')
   nmap('<leader>ls', '<cmd>Lspsaga signature_help<CR>', '[S]ignature Help')
-  nmap('<leader>lw', '<cmd>Lspsaga show_workspace_diagnostics<CR>', '[W]orkspace Diagnostics')
+  -- nmap('<leader>lw', '<cmd>Lspsaga show_workspace_diagnostics<CR>', '[W]orkspace Diagnostics')
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
@@ -151,7 +151,7 @@ local lsp_keymaps = function(bufnr)
   nmap('<leader>ws', telescope.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+  -- nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality

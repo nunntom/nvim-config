@@ -8,34 +8,56 @@ return {
 
     conform.setup {
       formatters_by_ft = {
-        javascript = { 'eslint_d', 'prettier' },
-        typescript = { 'eslint_d', 'prettier' },
-        javascriptreact = { 'eslint_d', 'prettier' },
-        typescriptreact = { 'eslint_d', 'prettier' },
-        svelte = { 'prettier' },
-        css = { 'prettier' },
-        html = { 'prettier' },
-        json = { 'prettier' },
-        yaml = { 'prettier' },
-        markdown = { 'prettier' },
-        graphql = { 'prettier' },
+        javascript = { 'prettierd', 'eslint_d' },
+        typescript = { 'prettierd', 'eslint_d' },
+        javascriptreact = { 'prettierd', 'eslint_d' },
+        typescriptreact = { 'prettierd', 'eslint_d' },
+        svelte = { 'prettierd', 'eslint_d' },
+        css = { 'prettierd' },
+        html = { 'prettierd' },
+        json = { 'prettierd' },
+        yaml = { 'yamlfmt' },
+        markdown = { 'prettierd' },
+        graphql = { 'prettierd' },
         lua = { 'stylua' },
-        twig = { 'prettier' },
-        php = { 'intelephense' },
+        twig = { 'prettierd' },
+        php = { 'mago_format' },
         elm = { 'elm-format' },
         nix = { 'nixfmt', 'nil_ls' },
-        scm = { 'prettier' },
+        scm = { 'prettierd' },
         go = { 'gofmt', 'gofumpt' },
         sql = { 'sqlfmt' },
-        vue = { 'eslint_d', 'prettier' },
+        vue = { 'prettierd', 'eslint_d' },
+        kdl = { 'kdlfmt' },
+        scss = { 'prettierd' },
+        pug = { 'prettierd' },
+        dockerfile = { 'dockerfmt' },
+        caddy = { 'caddyfmt' },
       },
       format_on_save = function(bufnr)
         -- Disable with a global or buffer-local variable
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
           return
         end
-        return { timeout_ms = 5000, lsp_fallback = true }
+        return { timeout_ms = 10000, lsp_fallback = true }
       end,
+      formatters = {
+        ['php-cs-fixer'] = {
+          command = 'php-cs-fixer',
+          args = {
+            'fix',
+            '--rules=@PSR12', -- Formatting preset. Other presets are available, see the php-cs-fixer docs.
+            '$FILENAME',
+          },
+          stdin = false,
+        },
+
+        ['caddyfmt'] = {
+          command = 'caddy',
+          args = { 'fmt', '-' },
+          stdin = true,
+        },
+      },
     }
 
     vim.api.nvim_create_user_command('FormatDisable', function(args)
@@ -61,7 +83,7 @@ return {
       conform.format {
         lsp_fallback = true,
         async = false,
-        timeout_ms = 5000,
+        timeout_ms = 10000,
       }
     end, { desc = 'Format file or range (in visual mode)' })
   end,

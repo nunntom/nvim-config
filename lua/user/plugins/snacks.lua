@@ -3,28 +3,82 @@ return {
   priority = 1000,
   lazy = false,
   opts = {
-    dashboard = { enabled = true },
-    bigfile = { enabled = true },
-    notify = { enabled = true },
-    notifier = { enabled = true, timeout = 3000 },
-    quickfile = { enabled = true },
-    statuscolumn = { enabled = true },
-    words = { enabled = true },
-    git = { enabled = true },
-    gitbrowse = { enabled = true },
-    lazygit = { enabled = true },
-    scratch = { enabled = true },
-    terminal = { enabled = true },
-    toggle = { enabled = true },
+    dashboard = {},
+    bigfile = {},
+    notify = {},
+    notifier = { timeout = 3000 },
+    picker = {},
+    explorer = {},
+    quickfile = {},
+    statuscolumn = {},
+    words = {},
+    git = {},
+    gitbrowse = {},
+    lazygit = {},
+    scratch = {},
+    terminal = {},
+    toggle = {},
     styles = {
       notification = {
         wo = { wrap = true },
       },
     },
+    image = {},
+    indent = {},
+    input = {},
   },
   keys = {
     {
-      '<leader>gl',
+      '<leader>sf',
+      function()
+        Snacks.picker.smart()
+      end,
+      desc = 'Smart Find Files',
+    },
+    {
+      '<leader><space>',
+      function()
+        Snacks.picker.buffers()
+      end,
+      desc = 'Find Open Buffers',
+    },
+    {
+      '<leader>n',
+      function()
+        Snacks.picker.notifications()
+      end,
+      desc = 'Notification History',
+    },
+    {
+      '<leader>sd',
+      function()
+        Snacks.picker.diagnostics()
+      end,
+      desc = 'Diagnostics',
+    },
+    {
+      '<leader>sD',
+      function()
+        Snacks.picker.diagnostics_buffer()
+      end,
+      desc = 'Buffer Diagnostics',
+    },
+    {
+      '<leader>sb',
+      function()
+        Snacks.picker.lines()
+      end,
+      desc = 'Buffer Lines',
+    },
+    {
+      '<leader>sq',
+      function()
+        Snacks.picker.qflist()
+      end,
+      desc = 'Quickfix List',
+    },
+    {
+      '<leader>lg',
       function()
         Snacks.lazygit.open()
       end,

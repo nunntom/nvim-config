@@ -2,6 +2,7 @@
 -- NOTE: You can change these options as you wish!
 
 vim.wo.wrap = false
+-- vim.o.wrapmargin = 10
 
 -- Set highlight on search
 vim.o.hlsearch = false

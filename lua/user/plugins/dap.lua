@@ -14,7 +14,8 @@ return {
           request = 'launch',
           name = 'Listen for Xdebug',
           port = 9003,
-          pathMappings = { ['/api/'] = '${workspaceFolder}' },
+          hostname = '0.0.0.0',
+          pathMappings = { ['/var/www/html/api/'] = vim.fn.getcwd() },
         },
       }
     end,
