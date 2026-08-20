@@ -1,4 +1,4 @@
-vim.lsp.enable { 'luals', 'vtsls', 'elm', 'gleam', 'eslint', 'tailwindcss', 'omnisharp', 'nil', 'phpactor', 'ols', 'glsl_analyzer' }
+vim.lsp.enable { 'luals', 'vtsls', 'elm', 'gleam', 'eslint', 'tailwindcss', 'omnisharp', 'nil', 'phpactor', 'ols', 'glsl_analyzer', 'go' }
 vim.lsp.enable('intelephense', false)
 
 vim.diagnostic.config {
